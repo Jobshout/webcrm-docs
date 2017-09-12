@@ -1,0 +1,40 @@
+<% 
+var drawTopNav="", drawFooterNav="", pageContentHtml=drawTemplate;
+console.log(navigation)
+if (typeof navigation !== "undefined" && navigation !== null) {
+	for(var tnav=0; tnav<navigation.length; tnav++){
+		if(navigation[tnav].categories=="top-navigation"){
+			if(navigation[tnav].type=="url"){		
+				drawTopNav+=' <li><a HREF="'+navigation[tnav].content+'" title="'+navigation[tnav].label+'"><span>'+navigation[tnav].label+'</span></a></li>';
+			}else if(navigation[tnav].type=="items"){
+				try{
+					var bookmarkItems = JSON.parse(navigation[tnav].bookmark_items); 
+        		}	catch (error){
+       				var bookmarkItems = navigation[tnav].bookmark_items; 
+    			} 
+				if(bookmarkItems.length>0){
+					drawTopNav+='<li data-toggle="collapse" data-target="#'+navigation[tnav]._id+'" class="collapsed">';
+					drawTopNav+='<a href="#"><i class="fa fa-globe fa-lg"></i>'+navigation[tnav].label+' <span class="arrow"></span></a></li>';
+					drawTopNav+='<ul class="sub-menu collapse" id="'+navigation[tnav]._id+'">';
+					bookmarkItems.sort(dynamicSort("item_sort_order"));
+					for(var count=0; count< bookmarkItems.length; count++){
+						if(bookmarkItems[count].type=="url"){
+							drawTopNav+='<li><a href="'+bookmarkItems[count].content+'" title="'+bookmarkItems[count].label+'">'+bookmarkItems[count].label+'</a></li>';
+						}else if(bookmarkItems[count].type=="html"){
+							drawTopNav+='	<li>'+bookmarkItems[count].content+'</li>';
+						}
+					}
+					drawTopNav+='</ul>';
+				}
+			}
+		} else if(navigation[tnav].categories=="footer-nav" && navigation[tnav].content!=""){
+			drawFooterNav+=' <li><a HREF="'+navigation[tnav].content+'" title="'+navigation[tnav].label+'">'+navigation[tnav].label+'</a></li>';
+		} 
+	}	
+} 
+console.log(drawTopNav);
+pageContentHtml = pageContentHtml.replace("__headerbookmark__", drawTopNav);
+pageContentHtml = pageContentHtml.replace("__footerbookmark__", drawFooterNav);
+%>
+
+<%- pageContentHtml %>
