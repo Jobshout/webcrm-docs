@@ -13,7 +13,7 @@ if (typeof navigation !== "undefined" && navigation !== null) {
        				var bookmarkItems = navigation[tnav].bookmark_items; 
     			} 
 				if(bookmarkItems.length>0){
-					drawTopNav+='<li data-toggle="collapse" data-target="#'+navigation[tnav]._id+'" class="collapsed">';
+					drawTopNav+='<li data-toggle="collapse" data-target="#'+navigation[tnav]._id+'" class="collapsed" STYLE="padding-left:0px;>';
 					drawTopNav+='<a href="#"><i class="fa fa-globe fa-lg"></i>'+navigation[tnav].label+' <span class="arrow"></span></a></li>';
 					drawTopNav+='<ul class="sub-menu collapse" id="'+navigation[tnav]._id+'">';
 					bookmarkItems.sort(dynamicSort("item_sort_order"));

@@ -15,7 +15,7 @@
        									var bookmarkItems = navigation[tnav].bookmark_items; 
     								} 
 									if(bookmarkItems.length>0){	%>
-										<li data-toggle="collapse" data-target="#<%= navigation[tnav]._id %>" class="collapsed">
+										<li data-toggle="collapse" data-target="#<%= navigation[tnav]._id %>" class="collapsed" STYLE="padding-left:0px;>
                 							<a href="#"><i class="fa fa-globe fa-lg"></i> <%= navigation[tnav].label %> <span class="arrow"></span></a>
             							</li>
             							<ul class="sub-menu collapse" id="<%= navigation[tnav]._id %>">
